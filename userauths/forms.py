@@ -4,10 +4,10 @@ from userauths.models import User
 
 
 
-USER_TYPE = (
+USER_TYPE = [  
     ("Doctor", "Doctor"),
     ("Patient", "Patient"),
-)
+]
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -15,7 +15,7 @@ class UserRegistrationForm(UserCreationForm):
   email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',"placeholder": "jhondoe@gmail.com"}))
   password1=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": "**********"}))
   password2=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": "**********"}))
-  user_type=forms.ChoiceField(choices=USER_TYPE)
+  user_type=forms.ChoiceField(choices=USER_TYPE, widget=forms.Select(attrs={'class': 'form-select'}))
   
   class Meta:
       model=User

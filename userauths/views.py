@@ -13,7 +13,7 @@ def Register_view(request):
         return redirect("/")
     
     if request.method == "POST":
-        form = userauths_forms.UserRegisterForm(request.POST or None)
+        form = userauths_forms.UserRegistrationForm(request.POST or None)
 
         if form.is_valid():
             user = form.save()
@@ -88,4 +88,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "Logout successful")
-    return redirect("/")
+    return redirect("userauths:sign-in")
