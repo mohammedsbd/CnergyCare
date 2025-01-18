@@ -16,21 +16,21 @@ def Register_view(request):
     if request.method == 'POST':
         form=userauths_forms.UserRegistrationForm(request.POST or None)
     
-    if form.is_valid():
-       user= form.save()
-       full_name=form.cleaned_data.get("full_name")
-       email = form.cleaned_data.get("email")
-       password1=form.cleaned_data.get("password1")
-       user_type=form.cleaned_data.get("user_type")
+        if form.is_valid():
+           user= form.save()
+           full_name=form.cleaned_data.get("full_name")
+           email = form.cleaned_data.get("email")
+           password1=form.cleaned_data.get("password1")
+           user_type=form.cleaned_data.get("user_type")
        
        
        
        
     #    to immidetly login the user without taking time
-       user=authenticate(request,email=email, password=password1)
-       print("user type =======" ,user_type)
-       if user is not None:
-           login(request,user)
+           user=authenticate(request,email=email, password=password1)
+           print("user type =======" ,user_type)
+           if user is not None:
+              login(request,user)
            
            
            if user_type=="Doctor":
@@ -57,4 +57,6 @@ def login_view(request):
     if request.user.is_authenticated:
         messages.success(request,"You are already logged in")
         return redirect('/')
-    form=userauths_forms.UserRegistrationForm(request.POST or None)
+    
+    if request.method =="POST":
+        form=userauths_forms.LoginForm(request.POST or None)
