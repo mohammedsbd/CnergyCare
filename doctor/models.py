@@ -1,10 +1,10 @@
 from django.db import models
-from django.utlis import timezone
-from userauths import userauths_models
+from django.utils import timezone
+from userauths import models as userauths_models
 
 
 # we created tuple here for every new appintment notification the doctor gets
-NOTFICIATION_TYPE=(
+NOTIFICATION_TYPE=(
     ("New Appointment", "New Appointment"),
     ("Appointment Cancelled", "Appointment Cancelled"),
 )
@@ -32,10 +32,9 @@ class Notification(models.Model):
     appointment=models.ForeignKey("base.Appointment", on_delete=models.CASCADE, null=True, blank=True, related_name="doctor_appointment_notification")
     type=models.CharField(max_length=100, choices=None)
     seen=models.BooleanField(default=False)
-    dates=models.DateField(auto_now_add=True)
+    date=models.DateField(auto_now_add=True)
     
- 
-class Meta:
-    verbose_name_plural = "Notification"
-def __str__(self):
-    return f"Dr {self.doctor.full_name} Notification"
+    class Meta:
+        verbose_name_plural = "Notification"
+    def __str__(self):
+        return f"Dr {self.doctor.full_name} Notification" 
