@@ -19,7 +19,7 @@ class Doctor(models.Model):
     country=models.CharField(max_length=100, null=True, blank=True)
     bio=models.CharField(max_length=100, null=True, blank=True)
     specialization=models.CharField(max_length=100, null=True, blank=True)
-    qualification=models.CharField(max_length=100, null=True, blank=True)
+    qualifications=models.CharField(max_length=100, null=True, blank=True)
     years_of_experience=models.CharField(max_length=100, null=True, blank=True)
     next_available_appointment_date=models.CharField(max_length=100, null=True, blank=True)
     
