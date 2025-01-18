@@ -8,7 +8,15 @@ def Register_view(request):
     if request.user.is_authenticated:
         messages.success(request,"You are already logged in")
         return redirect('/')
-    form=userauths_forms.UserRegistrationForm()
+    form=userauths_forms.UserRegistrationForm(request.POST or None)
+    
+    if form.is_valid():
+       user= form.save()
+       full_name=form.cleaned_data.get("full_name")
+       email=form.cleaned_data.get("email")
+       password=form.cleaned_data.get("password")
+        
+        
     context={
         "form": form
     }
