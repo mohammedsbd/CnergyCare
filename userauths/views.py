@@ -12,4 +12,4 @@ def Register_view(request):
     context={
         "form": form
     }
-    return render(request,"userauths/signup.html",context)
+    return render(request,"userauths/sign-up.html",context)
