@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate ,login, logout
 from userauths import forms as userauths_forms
 
 # Create your views here.
@@ -13,8 +14,18 @@ def Register_view(request):
     if form.is_valid():
        user= form.save()
        full_name=form.cleaned_data.get("full_name")
-       email=form.cleaned_data.get("email")
+       email = form.cleaned_data.get("email")
        password=form.cleaned_data.get("password")
+       user_type=form.cleaned_data.get("user_type")
+   
+       
+    #    to immidetly login the user without taking time
+       user_=authenticate(email=email, password=password)
+       login(request, user_)
+    
+       messages.success(request,"Account Created Successfully")
+       return redirect('/')
+    
         
         
     context={
