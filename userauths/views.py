@@ -60,3 +60,22 @@ def login_view(request):
     
     if request.method =="POST":
         form=userauths_forms.LoginForm(request.POST or None)
+        if form.is_valid():
+            email=form.cleaned_data.get('email')
+            password=form.cleaned_data.get('password')
+            
+            if user is not None:
+              login(request,user)
+           
+           
+              if user_type=="Doctor":
+                    doctor_models.Doctor.objects.create(user=user, full_name=full_name)
+              else:
+                   patient_models.Patient.objects.create(user=user, full_name=full_name, email=email)
+   
+    
+              messages.success(request,"Account Created Successfully")
+              return redirect('/')
+    
+    else:
+            messages.error(request,"Authentication Failed, please try again")
