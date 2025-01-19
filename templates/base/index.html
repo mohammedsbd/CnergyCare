@@ -29,90 +29,33 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, reiciendis.</p>
     </div>
     <div class="row">
+
+
+      {% for s in services %}
         <div class="col-lg-3">
             <div class="card mb-4 shadow">
-                <a href="course-detail.html">
-                    <img src="https://themeperch.net/doctoraltheme/wp-content/uploads/2016/08/neurologist-2.jpg"
-                        alt="course" class="card-img-top" />
+                <a href="{% url 'base:service_detail' s.id %}">
+                    <img src="{{s.image.url}}" alt="course"
+                        class="card-img-top" />
                 </a>
                 <div class="card-body">
-                    <h4 class="mb-2 text-truncate-line-2"><a href="course-detail.html"
-                            class="text-inherit text-dark text-decoration-none">Neurology</a></h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h4 class="mb-2 text-truncate-line-2"><a href="{% url 'base:service_detail' s.id %}"
+                            class="text-inherit text-dark text-decoration-none">{{s.name}}</a></h4>
+                    <p>{{s.description|truncatechars:40}}</p>
                     <div class="mt-2">
-                        <span class="fw-semibold">Doctors Available: 17</span>
+                        <span class="fw-semibold">Doctors Available:{{s.available_doctors.all.count}}</span>
                         <div class="lh-1 mt-3">
-                            <span class="text-dark fw-bold fs-4">$25</span>
+                            <span class="text-dark fw-bold fs-4">${{s.cost}}</span>
                         </div>
-                        <a href="services-detail.html" class="btn btn-sm btn-primary mt-3">Book Appointment <i
+                        <a href="{% url 'base:service_detail' s.id %}" class="btn btn-sm btn-primary mt-3">Book Appointment <i
                                 class="fas fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="card mb-4 shadow">
-                <a href="course-detail.html">
-                    <img src="https://themeperch.net/doctoraltheme/wp-content/uploads/2016/08/neurologist-2.jpg"
-                        alt="course" class="card-img-top" />
-                </a>
-                <div class="card-body">
-                    <h4 class="mb-2 text-truncate-line-2"><a href="course-detail.html"
-                            class="text-inherit text-dark text-decoration-none">Neurology</a></h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <div class="mt-2">
-                        <span class="fw-semibold">Doctors Available: 17</span>
-                        <div class="lh-1 mt-3">
-                            <span class="text-dark fw-bold fs-4">$25</span>
-                        </div>
-                        <a href="services-detail.html" class="btn btn-sm btn-primary mt-3">Book Appointment <i
-                                class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card mb-4 shadow">
-                <a href="course-detail.html">
-                    <img src="https://themeperch.net/doctoraltheme/wp-content/uploads/2016/08/neurologist-2.jpg"
-                        alt="course" class="card-img-top" />
-                </a>
-                <div class="card-body">
-                    <h4 class="mb-2 text-truncate-line-2"><a href="course-detail.html"
-                            class="text-inherit text-dark text-decoration-none">Neurology</a></h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <div class="mt-2">
-                        <span class="fw-semibold">Doctors Available: 17</span>
-                        <div class="lh-1 mt-3">
-                            <span class="text-dark fw-bold fs-4">$25</span>
-                        </div>
-                        <a href="services-detail.html" class="btn btn-sm btn-primary mt-3">Book Appointment <i
-                                class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card mb-4 shadow">
-                <a href="course-detail.html">
-                    <img src="https://themeperch.net/doctoraltheme/wp-content/uploads/2016/08/neurologist-2.jpg"
-                        alt="course" class="card-img-top" />
-                </a>
-                <div class="card-body">
-                    <h4 class="mb-2 text-truncate-line-2"><a href="course-detail.html"
-                            class="text-inherit text-dark text-decoration-none">Neurology</a></h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <div class="mt-2">
-                        <span class="fw-semibold">Doctors Available: 17</span>
-                        <div class="lh-1 mt-3">
-                            <span class="text-dark fw-bold fs-4">$25</span>
-                        </div>
-                        <a href="services-detail.html" class="btn btn-sm btn-primary mt-3">Book Appointment <i
-                                class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+      {% endfor %}
+     
     </div>
 </section>
 

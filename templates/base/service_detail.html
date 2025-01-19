@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+
+<section class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-lg-7 p-4 rounded-3 bg-white">
+            <h1 class="display-4 fw-bold mt-5">
+                <span class="text-primary"><b>{{service.name}}</b></span>
+            </h1>
+            <p class="fs-4 mt-4">{{service.description}}</p>
+           
+        </div>
+        <div class="col-12 col-lg-5">
+            <img class="img-fluid mt-4" style="width: 100%; height: 350px; object-fit: cover; border-radius: 10px"
+                src="{{service.image.url}}" alt="" />
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="">
+        <h2 class="">Available Doctos</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, reiciendis.</p>
+    </div>
+    <div class="">
+        {% for d in service.available_doctors.all %}
+        <div class="p-1 mb-4 shadow d-flex align-items-center">
+            <a href="course-detail.html">
+                <img src="{{d.image.url}}"
+                    alt="course" style="width: 70px; height: 70px; object-fit: cover ; border-radius: 5px" class="card-img-top" />
+            </a>
+            <div class="card-body">
+                <div class="mt-2 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1 text-truncate-line-2"><a href="course-detail.html"
+                                class="text-inherit text-dark text-decoration-none">{{d.full_name}}</a></h5>
+                        <div class="d-flex gap-2">
+                            <p class="fw-semibold mt-0 mb-0">Time Available:</p>
+                            <p class="mt-0 mb-0">{{d.next_available_appointment_date}}</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <p class="fw-semibold mt-0 mb-0">Price:</p>
+                            <p class="mt-0 mb-0">${{service.cost}}</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a href="book-appointment.html" class="btn btn-primary me-4">Book Now <i
+                                class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+      
+    </div>
+</section>
+{% endblock content %}

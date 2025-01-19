@@ -21,7 +21,7 @@ class Doctor(models.Model):
     specialization=models.CharField(max_length=100, null=True, blank=True)
     qualifications=models.CharField(max_length=100, null=True, blank=True)
     years_of_experience=models.CharField(max_length=100, null=True, blank=True)
-    next_available_appointment_date=models.CharField(max_length=100, null=True, blank=True)
+    next_available_appointment_date=models.DateTimeField(default=timezone.now, null=True, blank=True)
     
     def __str__(self):
         return f"Dr. {self.full_name}"
