@@ -21,28 +21,28 @@
                 </div>
                 <ul class="list-unstyled ms-n2 mb-4">
                     <li class="nav-item">
-                        <a class="dropdown-item nav-link" href="/doctor/dashboard.html"><i class="bi bi-grid-fill"></i>
+                        <a class="dropdown-item nav-link" href="{% url 'doctor:dashboard' %}"><i class="bi bi-grid-fill"></i>
                             Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="dropdown-item nav-link" href="/doctor/appointments.html"><i
+                        <a class="dropdown-item nav-link" href="{% url 'doctor:appointments' %}"><i
                                 class="fas fa-calendar"></i> Appointment</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="dropdown-item nav-link" href="/doctor/payments.html"><i
+                        <a class="dropdown-item nav-link" href="{% url 'doctor:dashboard' %}"><i
                                 class="fas fa-credit-card"></i> Payments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="dropdown-item nav-link" href="/doctor/notifications.html"><i class="fas fa-bell"></i>
+                        <a class="dropdown-item nav-link" href="{% url 'doctor:dashboard' %}"><i class="fas fa-bell"></i>
                             Notification</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/doctor/profile.html"> <i class="fas fa-edit"></i> Edit
+                        <a class="nav-link" href="{% url 'doctor:dashboard' %}"> <i class="fas fa-edit"></i> Edit
                             Profile </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../auth/login.html"> <i class="fas fa-sign-out-alt"></i>
+                        <a class="nav-link" href="{% url 'userauths:sign-out' %}"> <i class="fas fa-sign-out-alt"></i>
                             Sign Out </a>
                     </li>
                 </ul>
