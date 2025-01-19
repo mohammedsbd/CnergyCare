@@ -117,15 +117,56 @@ def stripe_payment(request, billing_id):
                     'product_data': {
                         'name': billing.patient.full_name
                     },
-                    'unit_amount': int(billing.total )* 1000
+                    'unit_amount': int(billing.total * 100)
                 },
                 'quantity': 1
             }
         ],
         mode='payment',
-        success_url = request.build_absolute_url(reverse("base:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_url(reverse("base:stripe_payment_verify", args=[billing.billing_id])) 
+        success_url = request.build_absolute_uri(reverse("base:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url=request.build_absolute_uri(reverse("base:stripe_payment_verify", args=[billing.billing_id]))+ "?session_id={CHECKOUT_SESSION_ID}",
         
     )
     return JsonResponse({"sessionId": checkout_session.id})
 
+
+
+def stripe_payment_verify(request, billing_id):
+    billing = base_models.Billing.objects.get(billing_id=billing_id)
+    session_id = request.GET.get("session_id")
+    session = stripe.checkout.Session.retrieve(session_id)
+
+    if session.payment_status == "paid":
+        if billing.status == "Unpaid":
+            billing.status = "Paid"
+            billing.save()
+            # billing.appointment.status = "Completed"
+            # billing.appointment.save()
+            
+            
+        doctor_models.Notification.objects.create(
+                doctor=billing.appointment.doctor,
+                appointment=billing.appointment,
+                type="New Appointment"
+            )
+        
+        patient_models.Notification.objects.create(
+                patient=billing.appointment.patient,
+                appointment=billing.appointment,
+                type="Appointment Scheduled"
+            )
+
+        return redirect(f"/payment_status/{billing.billing_id}/?payment_status=paid")
+    else:
+        return redirect(f"/payment_status/{billing.billing_id}/?payment_status=failed")
+    
+@login_required
+def payment_status(request, billing_id):
+    billing = base_models.Billing.objects.get(billing_id=billing_id)
+    payment_status = request.GET.get("payment_status")
+
+    context = {
+        "billing": billing,
+        "payment_status": payment_status,
+    }
+    return render(request, "base/payment_status.html", context)

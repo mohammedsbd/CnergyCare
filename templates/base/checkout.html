@@ -91,11 +91,11 @@
 
     try {
         checkoutButton.addEventListener("click", function () {
-            var email = "EMAIL_HERE";
+            var email = "{{billing.patient.email}}";
 
             checkoutButton.innerHTML = "Processing <i class='fas fa-spinner fa-spin ms-2'></i>";
 
-            fetch("/stripe_payment/BILLING_ID_HERE/", {
+            fetch("/stripe_payment/{{billing.billing_id}}/", {
                 method: "POST",
                 body: JSON.stringify({ email: email }),
             })
