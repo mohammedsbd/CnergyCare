@@ -10,27 +10,27 @@
                 <div class="row">
                     <div class="col-lg-12 mb-3">
                         <label for="name" class="mb-2">Full Name</label>
-                        <input type="text" value="{{patient.full_name}}" readonly class="form-control bg-light" />
+                        <input type="text" value="{{billing.patient.full_name}}" readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="name" class="mb-2">Email</label>
-                        <input type="text" value={{patient.email}} readonly class="form-control bg-light" />
+                        <input type="text" value={{billing.patient.email}} readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="name" class="mb-2">Mobile Number</label>
-                        <input type="text" value={{patient.mobile}} readonly class="form-control bg-light" />
+                        <input type="text" value={{billing.patient.mobile}} readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="name" class="mb-2">Gender</label>
-                        <input type="text" value={{patient.gender}} readonly class="form-control bg-light" />
+                        <input type="text" value={{billing.patient.gender}} readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="name" class="mb-2">Date Of Birth</label>
-                        <input type="text" value={{patient.dob}} readonly class="form-control bg-light" />
+                        <input type="text" value={{billing.patient.dob}} readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-12 mb-3">
                         <label for="name" class="mb-2">Address</label>
-                        <input type="text" value={{patient.address}} readonly class="form-control bg-light" />
+                        <input type="text" value={{billing.patient.address}} readonly class="form-control bg-light" />
                     </div>
                 </div>
             </div>
@@ -41,14 +41,14 @@
                     <div class="col-12 col-lg-5">
                         <img class="img-fluid mt-4"
                             style="width: 100%; height: 450px; object-fit: cover; border-radius: 10px"
-                            src="DOCTOR_IMAGE_URL_HERE" alt="" />
+                            src="{{billing.appointment.doctor.image.url}}" alt="" />
                     </div>
 
                     <div class="col-12 col-lg-7 p-4 rounded-3 bg-white">
                         <h3 class="fw-bold mt-5">
-                            <span class=""><b>Dr. DOCTOR_NAME_HERE</b></span>
+                            <span class=""><b>Dr. {{billing.appointment.doctor.full_name}}</b></span>
                         </h3>
-                        <p class="fs-5 mt-4">DOCTOR_BIO_HERE</p>
+                        <p class="fs-5 mt-4">{{billing.appointment.doctor.bio|default:""}}</p>
                     </div>
                 </div>
             </div>
@@ -57,17 +57,17 @@
             <div class="shadow p-3 rounded-3">
                 <div class="d-flex justify-content-between">
                     <p class="fw-semibold fs-5">Sub-total</p>
-                    <p class="fs-5">$SUB_TOTAL_HERE</p>
+                    <p class="fs-5">${{billing.sub_total}}</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
                     <p class="fw-semibold fs-5">VAT</p>
-                    <p class="fs-5">$VAT_HERE</p>
+                    <p class="fs-5">${{billing.tax}}</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
                     <p class="fw-bold fs-4">Total</p>
-                    <p class="fw-bold fs-4">$TOTAL_HERE</p>
+                    <p class="fw-bold fs-4">${{billing.total}}</p>
                 </div>
                 <div class="mt-4">
                     <button type="button" id="stripe-payment" class="btn text-white w-100"
@@ -80,7 +80,7 @@
     </div>
 </section>
 
-<script src="https://www.paypal.com/sdk/js?client-id=PAYPAL_CLIENT_ID&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
