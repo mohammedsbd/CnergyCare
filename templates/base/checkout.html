@@ -1,0 +1,163 @@
+{% extends 'partials/base.html' %}
+
+
+{% block content %}
+<section class="container">
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="col-lg-6">
+            <div class="shadow p-3 rounded-3">
+                <h3 class="mb-4">Bio Data</h3>
+                <div class="row">
+                    <div class="col-lg-12 mb-3">
+                        <label for="name" class="mb-2">Full Name</label>
+                        <input type="text" value="{{patient.full_name}}" readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="name" class="mb-2">Email</label>
+                        <input type="text" value={{patient.email}} readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="name" class="mb-2">Mobile Number</label>
+                        <input type="text" value={{patient.mobile}} readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="name" class="mb-2">Gender</label>
+                        <input type="text" value={{patient.gender}} readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="name" class="mb-2">Date Of Birth</label>
+                        <input type="text" value={{patient.dob}} readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                        <label for="name" class="mb-2">Address</label>
+                        <input type="text" value={{patient.address}} readonly class="form-control bg-light" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow p-3 rounded-3 mt-4">
+                <h3 class="mb-4">Doctor Description</h3>
+                <div class="d-flex">
+                    <div class="col-12 col-lg-5">
+                        <img class="img-fluid mt-4"
+                            style="width: 100%; height: 450px; object-fit: cover; border-radius: 10px"
+                            src="DOCTOR_IMAGE_URL_HERE" alt="" />
+                    </div>
+
+                    <div class="col-12 col-lg-7 p-4 rounded-3 bg-white">
+                        <h3 class="fw-bold mt-5">
+                            <span class=""><b>Dr. DOCTOR_NAME_HERE</b></span>
+                        </h3>
+                        <p class="fs-5 mt-4">DOCTOR_BIO_HERE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="shadow p-3 rounded-3">
+                <div class="d-flex justify-content-between">
+                    <p class="fw-semibold fs-5">Sub-total</p>
+                    <p class="fs-5">$SUB_TOTAL_HERE</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <p class="fw-semibold fs-5">VAT</p>
+                    <p class="fs-5">$VAT_HERE</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <p class="fw-bold fs-4">Total</p>
+                    <p class="fw-bold fs-4">$TOTAL_HERE</p>
+                </div>
+                <div class="mt-4">
+                    <button type="button" id="stripe-payment" class="btn text-white w-100"
+                        style="background-color: blueviolet">Pay With Stripe <i
+                            class="fas fa-credit-card ms-2"></i></button>
+                    <div id="paypal-button-container" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://www.paypal.com/sdk/js?client-id=PAYPAL_CLIENT_ID&currency=USD"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    var stripe = Stripe("STRIPE_PUBLIC_KEY_HERE");
+    var checkoutButton = document.getElementById("stripe-payment");
+
+    try {
+        checkoutButton.addEventListener("click", function () {
+            var email = "EMAIL_HERE";
+
+            checkoutButton.innerHTML = "Processing <i class='fas fa-spinner fa-spin ms-2'></i>";
+
+            fetch("/stripe_payment/BILLING_ID_HERE/", {
+                method: "POST",
+                body: JSON.stringify({ email: email }),
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({ sessionId: session.sessionId });
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.log("Error: ", error);
+                });
+        });
+    } catch (error) {
+        console.log(error);
+    }
+</script>
+
+<script>
+    function initPayPalButton() {
+        paypal
+            .Buttons({
+                style: {
+                    shape: "rect",
+                    color: "gold",
+                    layout: "vertical",
+                    label: "paypal",
+                },
+
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ amount: { currency_code: "USD", value: "TOTAL_HERE" } }],
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (orderData) {
+                        // Full available details
+                        console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
+
+                        // Show a success message within this page, for example:
+                        const element = document.getElementById("paypal-button-container");
+                        element.innerHTML = "";
+                        element.innerHTML = "<h5>Verifying payment...</h5>";
+                        window.location.href = `/paypal_payment_verify/BILLING_ID_HERE/?transaction_id=${orderData.id}`;
+                    });
+                },
+
+                onError: function (err) {
+                    console.log(err);
+                },
+            })
+            .render("#paypal-button-container");
+    }
+    initPayPalButton();
+</script>
+
+
+{% endblock content %}
+
+
+
