@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+
+
+{% block content %}
+
+<section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row mt-0 mt-md-4">
+
+           {% include 'doctor/sidebar.html' %}
+
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="row mb-4">
+                    <h4 class="mb-0 mb-4 fw-bold">Dashboard</h4>
+                    <div class="col-sm-6 col-lg-6 mb-3 mb-lg-0">
+                        <div
+                            class="d-flex justify-content-center align-items-center p-4 bg-danger bg-opacity-10 rounded-3">
+                            <span class="display-6 lh-1 text-purple mb-0">
+                                <i class="fas fa-calendar text-danger"></i>
+                            </span>
+                            <div class="ms-4">
+                                <div class="d-flex">
+                                    <h5 class="mb-0 fw-bold">{{appointments.count}}</h5>
+                                </div>
+                                <p class="mb-0 h6 fw-semibold">Appointments</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-6 mb-3 mb-lg-0">
+                        <div
+                            class="d-flex justify-content-center align-items-center p-4 bg-dark bg-opacity-10 rounded-3">
+                            <span class="display-6 lh-1 text-dark mb-0">
+                                <i class="fas fa-bell"></i>
+                            </span>
+                            <div class="ms-4">
+                                <div class="d-flex">
+                                    <h5 class="mb-0 fw-bold">{{notifications.count}}</h5>
+                                </div>
+                                <p class="mb-0 h6 fw-semibold">Notifications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4 mt-5">
+                    <div class="table-responsive overflow-y-hidden">
+                        <table class="table mb-0 text-nowrap table-hover table-centered text-nowrap">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Appointment ID</th>
+                                    <th>Patient</th>
+                                    <th>Issue</th>
+                                    <th>Date</th>
+                                    <th>status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {% for a in appointments %}
+                                <tr>
+                                    <td>{{a.appointment_id}}</td>
+                                    <td>{{a.patient.full_name}}</td>
+                                    <td>{{a.issues}}</td>
+                                    <td>{{a.appointment_date}}</td>
+                                    <td>{{a.status}}</td>
+                                    <td>
+                                        <a href="" class="btn btn-secondary btn-sm"> <i class="fas fa-eye"></i></a>
+                                        <a href="" class="btn btn-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
+                                    </td>
+                                </tr>
+
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
