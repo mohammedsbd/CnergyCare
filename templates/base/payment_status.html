@@ -1,27 +1,41 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
 <section class="container">
     <div class="container">
-        <div class="d-flex justify-content-center flex-column align-items-center mb-5">
-            <i class="fas fa-check-circle text-success display-1"></i>
+
+        {% if payment_status == "paid" %}
+        <div style="margin-top: 40px;" class="d-flex justify-content-center flex-column align-items-center mb-5">
+            <i  class="fas fa-check-circle text-success display-1"></i>
             <h1>Appointment Scheduled Successfully</h1>
             <p class="text-success">Thanks for boking an appointment <i class="fas fa-check-circle"></i></p>
             <a href="patient/dashboard.html" class="btn btn-success d-flex align-items-center">My Dashboard <i
                     class="bi bi-grid-fill ms-2"></i></a>
         </div>
+        {% endif %}
 
-        <hr class="my-5" />
+        
+        
 
+      
+<!-- <hr class="my-5" />
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
             <i class="fas fa-spinner fa-spin text-warning display-1"></i>
             <h1>Appointment Scheduled Pending</h1>
             <p>We are processing your payment and enrollment, please hold on.</p>
-        </div>
+        </div> -->
 
-        <hr class="my-5" />
+        
+
+        {% if payment_status == "failed" %}
 
         <div class="d-flex justify-content-center flex-column align-items-center mb-5">
             <i class="fas fa-exclamation-triangle fa-flip text-danger display-1"></i>
             <h1>Appointment Scheduled Failed</h1>
             <p>We couldn't process your payment, please try again later. Thank you</p>
         </div>
+        {% endif %}
     </div>
 </section>
+
+{% endblock content %}

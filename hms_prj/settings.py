@@ -33,6 +33,7 @@ SECRET_KEY = 'django-insecure-3pen6%hjcb3)0j0kacajnfo=2bilj47%(k)lg%i-u6im52n!&b
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
 
 # Application definition
@@ -161,7 +162,7 @@ CRISPY_TEMPLATE_PACK="bootstrap5"
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 PAYPAL_CLIENT_ID = env("PAYPAL_CLIENT_ID")
-PAYPAL_SECRET_KEY = env("PAYPAL_SECRET_KEY")
+PAYPAL_SECRET_ID = env("PAYPAL_SECRET_KEY")
 
 
 # Default primary key field type

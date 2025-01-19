@@ -132,7 +132,7 @@
 
                 createOrder: function (data, actions) {
                     return actions.order.create({
-                        purchase_units: [{ amount: { currency_code: "USD", value: "TOTAL_HERE" } }],
+                        purchase_units: [{ amount: { currency_code: "USD", value: "{{billing.total}}" } }],
                     });
                 },
 
@@ -145,7 +145,7 @@
                         const element = document.getElementById("paypal-button-container");
                         element.innerHTML = "";
                         element.innerHTML = "<h5>Verifying payment...</h5>";
-                        window.location.href = `/paypal_payment_verify/BILLING_ID_HERE/?transaction_id=${orderData.id}`;
+                        window.location.href = `/paypal_payment_verify/{{billing.billing_id}}/?transaction_id=${orderData.id}`;
                     });
                 },
 

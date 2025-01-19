@@ -12,4 +12,5 @@ urlpatterns =[
     
     path("stripe_payment/<billing_id>/", views.stripe_payment, name="stripe_payment"), 
     path("stripe_payment_verify/<billing_id>/", views.stripe_payment_verify, name="stripe_payment_verify"), 
+    path("paypal_payment_verify/<billing_id>/", views.paypal_payment_verify, name="paypal_payment_verify"), 
 ]
