@@ -8,7 +8,7 @@ from patient import models as patient_models
 # Create your models here.
 
 class Service(models.Model):
-    image=models.FileField(upload_to="images",null=True, blank=True)
+    image=models.ImageField(upload_to="images",null=True, blank=True)
     name=models.CharField(max_length=255)
     description=models.TextField(max_length=255,blank=True, null=True)
     cost=models.DecimalField(max_digits=10,decimal_places=2)

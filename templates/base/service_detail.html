@@ -20,13 +20,13 @@
 
 <section class="container">
     <div class="">
-        <h2 class="">Available Doctos</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, reiciendis.</p>
+        <h2 class="">Available Doctors</h2>
+        
     </div>
     <div class="">
         {% for d in service.available_doctors.all %}
         <div class="p-1 mb-4 shadow d-flex align-items-center">
-            <a href="course-detail.html">
+            <a href="">
                 <img src="{{d.image.url}}"
                     alt="course" style="width: 70px; height: 70px; object-fit: cover ; border-radius: 5px" class="card-img-top" />
             </a>

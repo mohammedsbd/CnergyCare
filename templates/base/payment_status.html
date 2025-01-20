@@ -9,7 +9,7 @@
             <i  class="fas fa-check-circle text-success display-1"></i>
             <h1>Appointment Scheduled Successfully</h1>
             <p class="text-success">Thanks for boking an appointment <i class="fas fa-check-circle"></i></p>
-            <a href="patient/dashboard.html" class="btn btn-success d-flex align-items-center">My Dashboard <i
+            <a href="{% url 'patient:dashboard' %}" class="btn btn-success d-flex align-items-center">My Dashboard <i
                     class="bi bi-grid-fill ms-2"></i></a>
         </div>
         {% endif %}

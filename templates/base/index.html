@@ -9,14 +9,14 @@
             <p class="fs-4 mt-4">Every patient is different, every smile is unique, We prioritize safety with health
                 checks, contactless check-in, enhanced PPE, and more.</p>
             <div class="d-flex align-items-center gap-2 mt-5">
-                <button class="btn btn-primary btn-lg">Create Account <i class="fas fa-user-plus ms-1"></i></button>
+                <a href="{% url 'userauths:sign-up' %}" class="btn btn-primary btn-lg">Create Account <i class="fas fa-user-plus ms-1"></i></a>
                 <button class="btn btn-outline-primary btn-lg">Book Appointment <i
                         class="fas fa-arrow-right ms-2"></i></button>
             </div>
         </div>
         <div class="col-12 col-lg-5">
             <img class="img-fluid mt-4" style="width: 100%; height: 350px; object-fit: cover; border-radius: 10px"
-                src="https://indiaeducationdiary.in/wp-content/uploads/2024/03/GettyImages-1217096099-3.jpg" alt="" />
+                src="../../media/images/GettyImages-1217096099-3.jpg" alt="img" />
         </div>
     </div>
 </section>
@@ -24,7 +24,8 @@
 <section class="container mt-5">
     <div class="py-4">
         <h2 class="">Our Services</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, reiciendis.</p>
+        <p>At DCare, we are dedicated to providing comprehensive, patient-centered care across a wide range of medical
+        specialties including: </p>
     </div>
     <div class="row">
         {% for s in services %}
@@ -57,14 +58,17 @@
     <div class="row d-flex align-items-center">
         <div class="col-lg-6">
             <h1 class="fw-bold">Get Appointment Now!</h1>
-            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et voluptate omnis
-                accusantium. Tenetur explicabo vero quo dolore. Repudiandae itaque accusantium dolor ab. Blanditiis esse
-                tempore ut ad accusantium nihil?</p>
+            <p class="text-secondary">At [Hospital Name], we make it easy for you to take charge of your health. Our "Get Appointment Now" service allows you
+            to quickly schedule consultations with our expert healthcare professionals at a time that suits you. Whether you need a
+            routine check-up, a specialist consultation, or follow-up care, our streamlined appointment process ensures minimal
+            waiting times and maximum convenience.
+            
+            </p>
 
             <div class="d-flex align-items-center gap-2 mt-5">
                 <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Services</button>
                 <button class="btn btn-primary">Create Account <i class="fas fa-user-plus ms-1"></i></button>
-                <button class="btn btn-primary">Learn More <i class="fas fa-arrow-right ms-1"></i></button>
+                <!-- <button class="btn btn-primary">Learn More <i class="fas fa-arrow-right ms-1"></i></button> -->
             </div>
         </div>
         <div class="col-lg-6">
