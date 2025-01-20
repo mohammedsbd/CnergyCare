@@ -1,0 +1,59 @@
+{% extends 'partials/base.html' %}
+
+
+{% block content %}
+<section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row mt-0 mt-md-4">
+        {% include 'patient/sidebar.html' %}
+
+            <div class="col-lg-9 col-md-8 col-12">
+                <h4 class="mb-0 mb-4 fw-bold">Profile</h4>
+                <form class="row" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-lg-12 mb-3">
+                        <label class="form-label">Profile Avatar</label>
+                        <input type="file" class="form-control" name="image" />
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="full_name" value="{{patient.full_name}}" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" name="email" value="{{patient.email}}" readonly class="form-control bg-light" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Mobile Number</label>
+                        <input type="text" name="mobile" value="{{patient.mobile}}" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Gender</label>
+                        <select name="gender" id="" class="form-select">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Date of birth</label>
+                        <input type="date" name="dob" value="{{formatted_dob}}" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Blood Group</label>
+                        <input type="text" name="blood_group" value="{{patient.blood_group}}" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label class="form-label">Address</label>
+                        <input type="text" name="address" value="{{patient.address}}" class="form-control" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save Changes <i class="fas fa-check-circle ms-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}
