@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'doctor',
     'patient',
     'userauths',
+    
+    'import_export',
+    "anymail"
  
     
 ]
@@ -156,7 +159,18 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-CRISPY_ALLOWED_TEMPLATE_PACKS="bootstrap5"
+ANYMAIL={
+    "MAILGUN_API_KEY":os.environ.get('MAILGUN_API_KEY'),
+    "MAILGUN_SENDER_DOMAIN":os.environ.get('MAILGUN_SENDER_DOMAIN'),
+}
+
+FROM_EMAIL="mohammed1112ok@gmail.com"
+EMAIL_BACKEND="anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL="mohammed1112ok@gmail.com"
+SERVER_EMAIL="mohammed1112ok@gmail.com"
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS="bootstrap5"  
 CRISPY_TEMPLATE_PACK="bootstrap5"
 
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
