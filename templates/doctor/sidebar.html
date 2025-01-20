@@ -11,12 +11,16 @@
         <div class="collapse navbar-collapse p-3" id="sidenav">
             <div class="navbar-nav flex-column">
                 <div class="d-flex align-items-center mb-3">
-                    <img src="https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg="
-                        alt="avatar" class="rounded-circle avatar-xl"
-                        style="width: 70px; height: 70px; object-fit: cover" />
+
+{% if request.user.doctor.image %}
+<img src="{{request.user.doctor.image.url}}" alt="avatar" class="rounded-circle avatar-xl"
+    style="width: 70px; height: 70px; object-fit: cover" />
+{% endif %}
+
+                   
                     <div class="ms-3">
-                        <h5 class="mb-0 fw-bold">Dr. Kerry Ting</h5>
-                        <p class="mb-1 fs-6">Doctor ID: 832974</p>
+                        <h5 class="mb-0 fw-bold">Dr. {{request.user.doctor.full_name}}</h5>
+                        <p class="mb-1 fs-6">Doctor ID: #{{request.user.doctor.id}}</p>
                     </div>
                 </div>
                 <ul class="list-unstyled ms-n2 mb-4">
