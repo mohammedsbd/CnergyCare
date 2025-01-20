@@ -9,48 +9,49 @@
 
             <div class="col-lg-9 col-md-8 col-12">
                 <h4 class="mb-0 mb-4 fw-bold">Payments</h4>
-                <form class="row" enctype="multipart/form-data">
+                <form class="row" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
                     <div class="col-lg-12 mb-3">
                         <label class="form-label">Profile Avatar</label>
                         <input type="file" class="form-control" name="image" />
                     </div>
                     <div class="col-lg-12 mb-3">
                         <label class="form-label">Full Name</label>
-                        <input type="text" name="full_name" value="" class="form-control" />
+                        <input type="text" name="full_name" value="{{doctor.full_name}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" name="email" value="" class="form-control" />
+                        <input type="email" name="email" value="{{doctor.user.email}}" readonly class="form-control bg-light" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Mobile Number</label>
-                        <input type="text" name="mobile" value="" class="form-control" />
+                        <input type="text" name="mobile" value="{{doctor.mobile}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Bio</label>
-                        <input type="text" name="bio" value="" class="form-control" />
+                        <input type="text" name="bio" value="{{doctor.bio}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Country</label>
-                        <input type="text" name="" value="" class="form-control" />
+                        <input type="text" name="country" value="{{doctor.country}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Specialization</label>
-                        <input type="text" name="specialization" value="" class="form-control" />
+                        <input type="text" name="specialization" value="{{doctor.specialization}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Qualifications</label>
-                        <input type="text" name="qualifications" value="" class="form-control" />
+                        <input type="text" name="qualifications" value="{{doctor.qualifications}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Years of Experience</label>
-                        <input type="text" name="years_of_experience" value="" class="form-control" />
+                        <input type="text" name="years_of_experience" value="{{doctor.years_of_experience}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Next Available Appointment Date</label>
-                        <input type="date" name="next_available_appointment_date" class="form-control" />
+                        <input type="date" name="next_available_appointment_date" value="{{formatted_next_available_appointment_date}}" class="form-control" />
                     </div>
-                    <button class="btn btn-success">Save Changes <i class="fas fa-check-circle ms-2"></i></button>
+                    <button type="submit" class="btn btn-success">Save Changes <i class="fas fa-check-circle ms-2"></i></button>
                 </form>
             </div>
         </div>
