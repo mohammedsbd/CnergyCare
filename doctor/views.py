@@ -197,3 +197,27 @@ def payments(request):
     }
 
     return render(request, "doctor/payments.html", context)
+
+
+@login_required
+def notifications(request):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    notifications = doctor_models.Notification.objects.filter(doctor=doctor, seen=False)
+
+    context = {
+        "notifications": notifications
+    }
+
+    return render(request, "doctor/notifications.html", context)
+
+
+@login_required
+def mark_noti_seen(request, id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    notification = doctor_models.Notification.objects.get(doctor=doctor, id=id)
+    notification.seen = True
+    notification.save()
+    
+    messages.success(request, "Notification marked as seen")
+    return redirect("doctor:notifications")
+
