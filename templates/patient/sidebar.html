@@ -1,0 +1,56 @@
+<div class="col-lg-3 col-md-4 col-12">
+    <nav class="navbar navbar-expand-md shadow-sm mb-4 mb-lg-0 sidenav border rounded">
+        <a class="d-xl-none d-lg-none d-md-none text-inherit fw-bold text-decoration-none text-dark p-3" href="#"> Menu
+        </a>
+        <button class="navbar-toggler d-md-none icon-shape icon-sm rounded bg-primary text-light m-3" type="button"
+            data-bs-toggle="collapse" data-bs-target="#sidenav" aria-controls="sidenav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="bi bi-grid"></span>
+        </button>
+
+        <div class="collapse navbar-collapse p-3" id="sidenav">
+            <div class="navbar-nav flex-column">
+                <div class="d-flex align-items-center mb-3">
+
+{% if request.user.patient.image %}
+<img src="{{request.user.patient.image.url}}" alt="avatar" class="rounded-circle avatar-xl"
+    style="width: 70px; height: 70px; object-fit: cover" />
+{% endif %}
+
+                   
+                    <div class="ms-3">
+                        <h5 class="mb-0 fw-bold">{{request.user.patient.full_name}}</h5>
+                
+                    </div>
+                </div>
+                <ul class="list-unstyled ms-n2 mb-4">
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link" href="{% url 'patient:dashboard' %}"><i class="bi bi-grid-fill"></i>
+                            Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link" href="{% url 'patient:dashboard' %}"><i
+                                class="fas fa-calendar"></i> Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link" href="{% url 'patient:dashboard' %}"><i
+                                class="fas fa-credit-card"></i> Payments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link" href="{% url 'patient:dashboard' %}"><i class="fas fa-bell"></i>
+                            Notification</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'patient:dashboard' %}"> <i class="fas fa-edit"></i> Edit
+                            Profile </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'userauths:sign-out' %}"> <i class="fas fa-sign-out-alt"></i>
+                            Sign Out </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
