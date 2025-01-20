@@ -84,3 +84,38 @@ def complete_appointment(request, appointment_id):
 
     messages.success(request, "Appointment Completed Successfully")
     return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+
+@login_required
+def add_medical_report(request, appointment_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+
+    if request.method == "POST":
+        diagnosis = request.POST.get("diagnosis")
+        treatment = request.POST.get("treatment")
+        base_models.MedicalRecord.objects.create(appointment=appointment, diagnosis=diagnosis, treatment=treatment)
+
+    
+    messages.success(request, "Medical Report Added Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+
+@login_required
+def edit_medical_report(request, appointment_id, medical_report_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+    medical_report = base_models.MedicalRecord.objects.get(id=medical_report_id, appointment=appointment)
+
+    if request.method == "POST":
+        diagnosis = request.POST.get("diagnosis")
+        treatment = request.POST.get("treatment")
+
+        medical_report.diagnosis = diagnosis
+        medical_report.treatment = treatment
+        medical_report.save()
+
+    messages.success(request, "Medical Report Updated Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)
