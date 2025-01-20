@@ -128,3 +128,43 @@ def mark_noti_seen(request, id):
     
     messages.success(request, "Notification marked as seen")
     return redirect("patient:notifications")
+
+
+
+
+
+@login_required
+def profile(request):
+    patient = patient_models.Patient.objects.get(user=request.user)
+    formatted_dob = patient.dob.strftime('%Y-%m-%d')
+    
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        image = request.FILES.get("image")
+        mobile = request.POST.get("mobile")
+        address = request.POST.get("address")
+        gender = request.POST.get("gender")
+        dob = request.POST.get("dob")
+        blood_group = request.POST.get("blood_group")
+
+        patient.full_name = full_name
+        patient.mobile = mobile
+        patient.address = address
+        patient.gender = gender
+        patient.dob = dob
+        patient.blood_group = blood_group
+
+        if image != None:
+            patient.image = image
+
+        patient.save()
+        messages.success(request, "Profile updated successfully")
+        return redirect("patient:profile")
+
+    context = {
+        "patient": patient,
+        "formatted_dob": formatted_dob,
+    }
+
+    return render(request, "patient/profile.html", context)
+
