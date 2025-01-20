@@ -8,7 +8,7 @@
             {% include 'patient/sidebar.html' %}
 
 
-            <div class="col-lg-9 col-md-8 col-12">
+           <div class="col-lg-9 col-md-8 col-12">
                 <h4 class="mb-0 mb-4 fw-bold">Appointment Detail #12345</h4>
                 <div class="card mb-4">
                     <div class="shadow border p-3 mb-4 rounded-4">
@@ -23,29 +23,15 @@
                                 <p><span class="fw-semibold text-dark">Date:</span> {{appointment.appointment_date}}</p>
                                 <p>
                                     <span class="fw-semibold text-dark">Action:</span>
+
                                     {% if appointment.status == "Scheduled" %}
-
-                                    <a href="{% url 'patient:appointment_detail' appointment.appointment_id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment <i
-                                            class="fas fa-trash ms-2"></i></a>
-                                    <a href="{% url 'patient:appointment_detailt' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Complete Appointment <i
-                                            class="fas fa-check-circle ms-2"></i></a>
-                                            {% endif %}
-
-                                            
-                                            
-                                            {% if appointment.status == "Cancelled" %}
-                                            
-                                            <a href="{% url 'patient:appointment_detail' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Activate
-                                                Appointment <i class="fas fa-trash ms-2"></i></a>
-                                            </a>
-                                            {% endif %}
-
-                                            {% if appointment.status == "Completed" %}
-                                            
-                                            <a href="{% url 'patient:appointment_detail' appointment.appointment_id %}"
-                                                class="btn btn-outline-success btn-sm">Completed <i class="fas fa-trash ms-2"></i></a>
-                                            </a>
-                                            {% endif %}
+                                    <a href="{% url 'patient:cancel_appointment' appointment.appointment_id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
+                                    <a href="{% url 'patient:complete_appointment' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Complete Appointment <i class="fas fa-check-circle ms-2"></i></a>
+                                    {% endif %} {% if appointment.status == "Cancelled" %}
+                                    <a href="{% url 'patient:activate_appointment' appointment.appointment_id %}" class="btn btn-success btn-sm">Activate Appointment <i class="fas fa-check-circle ms-2"></i></a>
+                                    {% endif %} {% if appointment.status == "Completed" %}
+                                    <a href="{% url 'patient:activate_appointment' appointment.appointment_id %}" class="btn btn-success btn-sm">Completed <i class="fas fa-check-circle ms-2"></i></a>
+                                    {% endif %}
                                 </p>
                             </a>
                         </p>
