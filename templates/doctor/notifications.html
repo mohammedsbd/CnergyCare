@@ -23,8 +23,8 @@
                                         <span class="me-2 fw-bold"> Date: <span class="fw-light">{{n.date}}</span> </span>
                                     </p>
                                     <p>
-                                        <button class="btn btn-outline-secondary btn-sm" type="button">Mark as Seen <i
-                                                class="fas fa-inbox ms-2"></i></button>
+                                        <a class="btn btn-outline-secondary btn-sm" href="{% url 'doctor:mark_noti_seen' n.id %}">Mark as Seen <i
+                                                class="fas fa-inbox ms-2"></i></a>
                                     </p>
                                 </div>
                             </div>

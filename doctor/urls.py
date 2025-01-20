@@ -18,6 +18,6 @@ urlpatterns =[
     path("edit_prescription/<appointment_id>/<prescription_id>/", views.edit_prescription, name="edit_prescription"),
     path("payments/", views.payments, name="payments"),
     path("notifications/", views.notifications, name="notifications"),
-    path("mark_noti_seen/", views.mark_noti_seen, name="mark_noti_seen"),
+    path("mark_noti_seen/<id>", views.mark_noti_seen, name="mark_noti_seen"),
 
 ]
