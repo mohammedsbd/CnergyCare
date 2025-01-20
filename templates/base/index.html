@@ -1,6 +1,4 @@
-{% extends 'partials/base.html' %}
-
-{% block content %}
+{% extends 'partials/base.html' %} {% block content %}
 <section class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-lg-7 p-4 rounded-3 bg-white">
@@ -18,7 +16,7 @@
         </div>
         <div class="col-12 col-lg-5">
             <img class="img-fluid mt-4" style="width: 100%; height: 350px; object-fit: cover; border-radius: 10px"
-                src="https://www.piedmont.org/media/BlogImages/primary-care-doctor.jpg" alt="" />
+                src="https://indiaeducationdiary.in/wp-content/uploads/2024/03/GettyImages-1217096099-3.jpg" alt="" />
         </div>
     </div>
 </section>
@@ -26,16 +24,14 @@
 <section class="container mt-5">
     <div class="py-4">
         <h2 class="">Our Services</h2>
-        <p>Our Hospital Offers the following services</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, reiciendis.</p>
     </div>
     <div class="row">
-
-
-      {% for s in services %}
+        {% for s in services %}
         <div class="col-lg-3">
             <div class="card mb-4 shadow">
                 <a href="{% url 'base:service_detail' s.id %}">
-                    <img src="{{s.image.url}}" alt="course"
+                    <img src="{{s.image.url}}" alt="course" style="height: 200px; object-fit: cover"
                         class="card-img-top" />
                 </a>
                 <div class="card-body">
@@ -43,19 +39,17 @@
                             class="text-inherit text-dark text-decoration-none">{{s.name}}</a></h4>
                     <p>{{s.description|truncatechars:40}}</p>
                     <div class="mt-2">
-                        <span class="fw-semibold">Doctors Available:{{s.available_doctors.all.count}}</span>
+                        <span class="fw-semibold">Doctors Available: {{s.available_doctors.all.count}}</span>
                         <div class="lh-1 mt-3">
                             <span class="text-dark fw-bold fs-4">${{s.cost}}</span>
                         </div>
-                        <a href="{% url 'base:service_detail' s.id %}" class="btn btn-sm btn-primary mt-3">Book Appointment <i
-                                class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="{% url 'base:service_detail' s.id %}" class="btn btn-sm btn-primary mt-3">Book
+                            Appointment <i class="fas fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-
-      {% endfor %}
-     
+        {% endfor %}
     </div>
 </section>
 
@@ -63,9 +57,9 @@
     <div class="row d-flex align-items-center">
         <div class="col-lg-6">
             <h1 class="fw-bold">Get Appointment Now!</h1>
-            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et voluptate
-                omnis accusantium. Tenetur explicabo vero quo dolore. Repudiandae itaque accusantium dolor ab.
-                Blanditiis esse tempore ut ad accusantium nihil?</p>
+            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et voluptate omnis
+                accusantium. Tenetur explicabo vero quo dolore. Repudiandae itaque accusantium dolor ab. Blanditiis esse
+                tempore ut ad accusantium nihil?</p>
 
             <div class="d-flex align-items-center gap-2 mt-5">
                 <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Services</button>
@@ -79,6 +73,4 @@
         </div>
     </div>
 </section>
-
 {% endblock content %}
-

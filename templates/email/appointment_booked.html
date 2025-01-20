@@ -64,34 +64,34 @@
 
 <body>
     <div class="email-container">
-        <h1>Hi Jane Smith</h1>
-        <p>Your appointment with Dr. John Doe was successfully scheduled</p>
+        <h1>Hi {{billing.appointment.patient.full_name}}</h1>
+        <p>Your appointment with Dr. {{billing.appointment.doctor.full_name}} was successfully scheduled</p>
 
         <div class="info-section">
             <h3><b>Service and Issues</b></h3>
-            <p><b>Service:</b> General Check-up</p>
-            <p><b>Issues:</b> Persistent headaches and fatigue</p>
-            <p><b>Symptoms:</b> Headache, dizziness, and nausea</p>
+            <p><b>Service:</b> {{ billing.appointment.service.name }}</p>
+            <p><b>Issues:</b> {{ billing.appointment.issues }}</p>
+            <p><b>Symptoms:</b> {{ billing.appointment.symptoms }}</p>
         </div>
 
         <div class="info-section">
             <h3><b>Doctor Bio Data</b></h3>
-            <p><b>Full Name:</b> Dr. John Doe</p>
-            <p><b>Email:</b> johndoe@example.com</p>
+            <p><b>Full Name:</b> Dr. {{billing.appointment.doctor.full_name}}</p>
+            <p><b>Email:</b> {{billing.appointment.doctor.user.email}}</p>
         </div>
 
         <div class="info-section">
             <h3><b>Appointment Details</b></h3>
-            <p><b>Appointment Date:</b> September 15, 2024</p>
-            <p><b>Appointment Status:</b> Confirmed</p>
-            <p><b>Appointment ID:</b> APT-20240915-001</p>
+            <p><b>Appointment Date:</b> {{billing.appointment.appointment_date}}</p>
+            <p><b>Appointment Status:</b> {{billing.appointment.status}}</p>
+            <p><b>Appointment ID:</b> {{billing.appointment.appointment_id}}</p>
         </div>
 
         <div class="info-section">
             <h3><b>Billing Details</b></h3>
-            <p><b>Billing ID:</b> BILL-20240915-001</p>
-            <p><b>Price:</b> $150.00</p>
-            <p><b>Status:</b> Paid</p>
+            <p><b>Billing ID:</b> {{billing.billing_id}}</p>
+            <p><b>Price:</b> ${{billing.sub_total}}</p>
+            <p><b>Status:</b> {{billing.status}}</p>
         </div>
 
         <p class="footer-text">Thanks for booking an appointment, your health is our priority.</p>
