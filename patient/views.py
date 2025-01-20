@@ -94,3 +94,37 @@ def complete_appointment(request, appointment_id):
 
     messages.success(request, "Appointment Completed Successfully")
     return redirect("patient:appointment_detail", appointment.appointment_id)
+
+
+@login_required
+def payments(request):
+    patient = patient_models.Patient.objects.get(user=request.user)
+    payments = base_models.Billing.objects.filter(appointment__patient=patient, status="Paid")
+
+    context = {
+        "payments": payments,
+    }
+
+    return render(request, "patient/payments.html", context)
+
+
+@login_required
+def notifications(request):
+    patient = patient_models.Patient.objects.get(user=request.user)
+    notifications = patient_models.Notification.objects.filter(patient=patient, seen=False)
+
+    context = {
+        "notifications": notifications
+    }
+
+    return render(request, "patient/notifications.html", context)
+
+@login_required
+def mark_noti_seen(request, id):
+    patient = patient_models.Patient.objects.get(user=request.user)
+    notification = patient_models.Notification.objects.get(patient=patient, id=id)
+    notification.seen = True
+    notification.save()
+    
+    messages.success(request, "Notification marked as seen")
+    return redirect("patient:notifications")
