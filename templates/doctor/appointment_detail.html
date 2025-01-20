@@ -162,31 +162,37 @@
                 </div>
                 <div class="collapse" id="collapsePrescription">
                     <div class="border p-3 mb-4 rounded-4">
-                        <form action="" method="POST">
+                        <form action="{% url 'doctor:add_prescription' appointment.appointment_id %}" method="POST">
+                            {% csrf_token %}
+
                             <textarea class="form-control mb-3" name="medications" placeholder="Medications"></textarea>
-                            <button class="btn btn-secondary btn-sm">Save <i class="fas fa-save ms-2"></i></button>
+                            <button type="submit" class="btn btn-secondary btn-sm">Save <i class="fas fa-save ms-2"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="card mb-4">
                     <div class="border p-3 mb-4 rounded-4">
+                     {% for p in prescriptions %}
                         <div class="shadow p-3 rounded-4 mb-3">
-                            <p><span class="fw-semibold text-dark">Medications:</span> Paracetamol, Ibuprofen</p>
-                            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapsePrescription1" aria-expanded="false"
-                                aria-controls="collapsePrescription1">Edit <i class="fas fa-edit ms-2"></i></button>
+                            <p><span class="fw-semibold text-dark">Medications:</span>{{p.medications}}</p>
+                            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrescription1"
+                                aria-expanded="false" aria-controls="collapsePrescription1">Edit <i class="fas fa-edit ms-2"></i></button>
                             <div class="collapse mt-3" id="collapsePrescription1">
                                 <div class="border p-3 rounded-4">
-                                    <form action="#" method="POST">
-                                        <input type="text" class="form-control mb-3" name="medications"
-                                            value="Paracetamol, Ibuprofen" placeholder="Medications" />
-                                        <button class="btn btn-secondary btn-sm">Save Changes <i
-                                                class="fas fa-save ms-2"></i></button>
+                                    <form action="{% url 'doctor:edit_prescription' appointment.appointment_id p.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" class="form-control mb-3" name="medications" value="{{p.medications}}"
+                                            placeholder="Medications" />
+                                        <button type="submit" class="btn btn-secondary btn-sm">Save Changes <i class="fas fa-save ms-2"></i></button>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        {% empty %}
                         <p>No prescriptions</p>
+
+                     {% endfor %}
+                       
                     </div>
                 </div>
             </div>

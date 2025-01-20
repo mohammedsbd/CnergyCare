@@ -155,3 +155,32 @@ def edit_lab_test(request, appointment_id, lab_test_id):
 
     messages.success(request, "Lab Report Updated Successfully")
     return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+
+@login_required
+def add_prescription(request, appointment_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+
+    if request.method == "POST":
+        medications = request.POST.get("medications")
+        base_models.Prescription.objects.create(medications=medications, appointment=appointment)
+
+    messages.success(request, "Prescription Added Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+@login_required
+def edit_prescription(request, appointment_id, prescription_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+    prescription = base_models.Prescription.objects.get(id=prescription_id)
+
+    if request.method == "POST":
+        medications = request.POST.get("medications")
+        prescription.medications = medications
+        prescription.save()
+
+    messages.success(request, "Prescription Updated Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)
