@@ -211,4 +211,13 @@ def notifications(request):
     return render(request, "doctor/notifications.html", context)
 
 
+@login_required
+def mark_noti_seen(request, id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    notification = doctor_models.Notification.objects.get(doctor=doctor, id=id)
+    notification.seen = True
+    notification.save()
+    
+    messages.success(request, "Notification marked as seen")
+    return redirect("doctor:notifications")
 
