@@ -119,3 +119,39 @@ def edit_medical_report(request, appointment_id, medical_report_id):
 
     messages.success(request, "Medical Report Updated Successfully")
     return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+@login_required
+def add_lab_test(request, appointment_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+
+    if request.method == "POST":
+        test_name = request.POST.get("test_name")
+        description = request.POST.get("description")
+        result = request.POST.get("result")
+
+        base_models.LabTest.objects.create(appointment=appointment, test_name=test_name, description=description, result=result)
+
+    messages.success(request, "Lab report Added Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)
+
+
+@login_required
+def edit_lab_test(request, appointment_id, lab_test_id):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
+    lab_test = base_models.LabTest.objects.get(id=lab_test_id, appointment=appointment)
+
+    if request.method == "POST":
+        test_name = request.POST.get("test_name")
+        description = request.POST.get("description")
+        result = request.POST.get("result")
+
+        lab_test.test_name = test_name
+        lab_test.description = description
+        lab_test.result = result
+        lab_test.save()
+
+    messages.success(request, "Lab Report Updated Successfully")
+    return redirect("doctor:appointment_detail", appointment.appointment_id)

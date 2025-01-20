@@ -12,5 +12,7 @@ urlpatterns =[
     path("complete_appointment/<appointment_id>", views.complete_appointment, name="complete_appointment"),
     path("add_medical_report/<appointment_id>", views.add_medical_report, name="add_medical_report"),
     path("edit_medical_report/<appointment_id>/<medical_report_id>/", views.edit_medical_report, name="edit_medical_report"),
+    path("add_lab_test/<appointment_id>", views.add_lab_test, name="add_lab_test"),
+    path("edit_lab_test/<appointment_id>/<lab_test_id>/", views.edit_lab_test, name="edit_lab_test"),
 
 ]
