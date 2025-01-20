@@ -82,12 +82,13 @@
         aria-expanded="false" aria-controls="collapseMedicalRecord{{m.id}}">Edit <i class="fas fa-edit ms-2"></i></button>
     <div class="collapse mt-3" id="collapseMedicalRecord{{m.id}}">
         <div class="border p-3 rounded-4">
-            <form action="#" method="POST">
-                <input type="text" class="form-control mb-3" value="" name="diagnosis"
+            <form action="{% url 'doctor:edit_medical_report' appointment.appointment_id m.id %}" method="POST">{% csrf_token %}
+              
+                <input type="text" class="form-control mb-3" value="{{m.diagnosis}}" name="diagnosis"
                     placeholder="Diagnosis" />
-                <input type="text" class="form-control mb-3" value="" name="treatment"
+                <input type="text" class="form-control mb-3" value="{{m.treatment}}" name="treatment"
                     placeholder="Treatment" />
-                <button class="btn btn-secondary btn-sm">Save Changes <i class="fas fa-save ms-2"></i></button>
+                <button type="submit" class="btn btn-secondary btn-sm">Save Changes <i class="fas fa-save ms-2"></i></button>
             </form>
         </div>
     </div>
