@@ -221,3 +221,44 @@ def mark_noti_seen(request, id):
     messages.success(request, "Notification marked as seen")
     return redirect("doctor:notifications")
 
+
+
+@login_required
+def profile(request):
+    doctor = doctor_models.Doctor.objects.get(user=request.user)
+    formatted_next_available_appointment_date = doctor.next_available_appointment_date.strftime('%Y-%m-%d')
+    
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        image = request.FILES.get("image")
+        mobile = request.POST.get("mobile")
+        country = request.POST.get("country")
+        bio = request.POST.get("bio")
+        specialization = request.POST.get("specialization")
+        qualifications = request.POST.get("qualifications")
+        years_of_experience = request.POST.get("years_of_experience")
+        next_available_appointment_date = request.POST.get("next_available_appointment_date")
+
+        doctor.full_name = full_name
+        doctor.mobile = mobile
+        doctor.country = country
+        doctor.bio = bio
+        doctor.specialization = specialization
+        doctor.qualifications = qualifications
+        doctor.years_of_experience = years_of_experience
+        doctor.next_available_appointment_date = next_available_appointment_date
+
+        if image != None:
+            doctor.image = image
+
+        doctor.save()
+        messages.success(request, "Profile updated successfully")
+        return redirect("doctor:profile")
+
+    context = {
+        "doctor": doctor,
+        "formatted_next_available_appointment_date": formatted_next_available_appointment_date,
+    }
+
+    return render(request, "doctor/profile.html", context)
+
