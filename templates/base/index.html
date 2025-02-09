@@ -65,8 +65,8 @@ y{% extends 'partials/base.html' %} {% block content %}
             </p>
 
             <div class="d-flex align-items-center gap-2 mt-5">
-                <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Services</button>
-                <button class="btn btn-primary">Create Account <i class="fas fa-user-plus ms-1"></i></button>
+<!--                 <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Services</button> -->
+             <a href="{% url 'userauths:sign-up' %}" class="btn btn-primary btn-lg">Create Account <i class="fas fa-user-plus ms-1"></i></a>
                 <!-- <button class="btn btn-primary">Learn More <i class="fas fa-arrow-right ms-1"></i></button> -->
             </div>
         </div>
