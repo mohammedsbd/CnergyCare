@@ -66,7 +66,7 @@ def login_view(request):
                 if user_instance is not None:
                     login(request, user_authenticate)
 
-                    messages.success(request, "Account created successfully")
+                    messages.success(request, "Account Logged In successfully")
                     
                     next_url = request.GET.get("next", '/')
                     return redirect(next_url)
