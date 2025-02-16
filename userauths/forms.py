@@ -11,11 +11,12 @@ USER_TYPE = [
 
 
 class UserRegistrationForm(UserCreationForm):
-  full_name=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',"placeholder": "jhon doe"}))
-  email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',"placeholder": "jhondoe@gmail.com"}))
-  password1=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": "**********"}))
-  password2=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": "**********"}))
+  full_name=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',}))
+  email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+  password1=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": ""}))
+  password2=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": ""}))
   user_type=forms.ChoiceField(choices=USER_TYPE, widget=forms.Select(attrs={'class': 'form-select'}))
+  
   
   class Meta:
       model=User
