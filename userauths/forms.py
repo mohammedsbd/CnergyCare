@@ -25,8 +25,8 @@ class UserRegistrationForm(UserCreationForm):
       
       
 class LoginForm(forms.Form):
-  email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',"placeholder": "jhondoe@gmail.com"}))
-  password=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": "**********"}))
+  email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',"placeholder": ""}))
+  password=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',"placeholder": ""}))
   
   
   class Meta:
